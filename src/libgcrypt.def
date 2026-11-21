@@ -309,4 +309,7 @@ EXPORTS
 
       gcry_kem_genkey           @268
 
+      gcry_ct_memequal          @269
+      gcry_ct_memequal_len      @270
+
 ;; end of file with public symbols for Windows.

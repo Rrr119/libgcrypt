@@ -26,7 +26,7 @@ tests_bin = \
 	t-mpi-bit t-mpi-point t-lock \
 	prime basic keygen pubkey hmac hashtest t-kdf keygrip \
 	aeswrap random t-kem t-thread-local t-fips-service-ind \
-	t-cipher-internal t-sntrup761
+	t-cipher-internal t-sntrup761 t-const-time
 
 if USE_RSA
 tests_bin += pkcs1v2 t-rsa-pss t-rsa-15 t-rsa-testparm

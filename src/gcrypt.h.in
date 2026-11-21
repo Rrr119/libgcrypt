@@ -2142,6 +2142,20 @@ void  gcry_free (void *a);
 /* Return true if A is allocated in "secure" memory. */
 int gcry_is_secure (const void *a) _GCRY_GCC_ATTR_PURE;
 
+/* Compare the byte arrays B1 and B2 of length LEN in constant time;
+   return 1 if they are equal, 0 otherwise.  The execution time does
+   not depend on the contents of the arrays.  */
+unsigned int gcry_ct_memequal (const void *b1, const void *b2, size_t len);
+
+/* Compare the byte array B1 of length LEN1 with the byte array B2 of
+   length LEN2 in constant time; return 1 if both the lengths and the
+   contents are equal, 0 otherwise.  In contrast to a plain memcmp
+   based implementation, a length mismatch does not lead to an early
+   return; the execution time depends only on the (public) length
+   values and never on the contents of the arrays.  */
+unsigned int gcry_ct_memequal_len (const void *b1, size_t len1,
+                                   const void *b2, size_t len2);
+
 /* Return true if Libgcrypt is in FIPS mode.  */
 #define gcry_fips_mode_active()  !!gcry_control (GCRYCTL_FIPS_MODE_P, 0)
 

@@ -23,6 +23,7 @@
 
 #define _GCRY_INCLUDED_BY_VISIBILITY_C
 #include "g10lib.h"
+#include "const-time.h"
 #include "cipher-proto.h"
 #include "context.h"
 #include "mpi.h"
@@ -1807,4 +1808,17 @@ int
 gcry_is_secure (const void *a)
 {
   return _gcry_is_secure (a);
+}
+
+unsigned int
+gcry_ct_memequal (const void *b1, const void *b2, size_t len)
+{
+  return _gcry_ct_memequal (b1, b2, len);
+}
+
+unsigned int
+gcry_ct_memequal_len (const void *b1, size_t len1,
+                      const void *b2, size_t len2)
+{
+  return _gcry_ct_memequal_len (b1, len1, b2, len2);
 }

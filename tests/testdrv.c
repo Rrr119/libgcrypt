@@ -54,6 +54,7 @@ static struct {
    { "mpitests"    },
    { "t-sexp"      },
    { "t-convert"   },
+   { "t-const-time" },
    { "t-mpi-bit"   },
    { "t-mpi-point" },
    { "curves"      },

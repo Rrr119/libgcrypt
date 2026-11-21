@@ -36,6 +36,8 @@ GCRYPT_1.6 {
     gcry_xcalloc; gcry_xcalloc_secure; gcry_xmalloc;
     gcry_xmalloc_secure; gcry_xrealloc; gcry_xstrdup;
 
+    gcry_ct_memequal; gcry_ct_memequal_len;
+
     gcry_md_algo_info; gcry_md_algo_name; gcry_md_close;
     gcry_md_copy; gcry_md_ctl; gcry_md_enable;
     gcry_md_get_algo; gcry_md_get_algo_dlen; gcry_md_hash_buffer;

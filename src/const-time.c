@@ -96,6 +96,42 @@ _gcry_ct_memequal (const void *b1, const void *b2, size_t len)
 }
 
 /*
+ * Compare byte arrays B1 of length LEN1 and B2 of length LEN2,
+ * return 1 if they have the same length and the same contents,
+ * 0, otherwise.
+ *
+ * In contrast to a naive implementation, this function does not
+ * return early when the lengths differ; the length comparison is
+ * folded into the result with constant-time operations and the
+ * contents are always compared.  The execution time thus depends
+ * only on the values of LEN1 and LEN2 (which are considered public
+ * parameters, like the length of a MAC), but never on the contents
+ * of the buffers nor on whether the lengths match.
+ */
+unsigned int
+_gcry_ct_memequal_len (const void *b1, size_t len1,
+		       const void *b2, size_t len2)
+{
+  size_t lendiff = len1 ^ len2;
+  size_t min = len1 < len2 ? len1 : len2;
+  unsigned int len_neq;
+  unsigned int content_neq;
+
+  /* Fold the high bits of the length difference down, so that the
+     constant-time zero test on an unsigned int catches any
+     difference.  */
+  if (sizeof (size_t) > sizeof (unsigned int))
+    lendiff |= lendiff >> (sizeof (size_t) * 8 / 2);
+  len_neq = ct_is_not_zero ((unsigned int)lendiff);
+
+  /* Always compare the contents over the common prefix; there is no
+     early exit on a length mismatch.  */
+  content_neq = _gcry_ct_not_memequal (b1, b2, min);
+
+  return ((content_neq | len_neq) ^ 1) & 1;
+}
+
+/*
  * Copy LEN bytes from memory area SRC to memory area DST, when
  * OP_ENABLED=1.  When DST <= SRC, the memory areas may overlap.  When
  * DST > SRC, the memory areas must not overlap.

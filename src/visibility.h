@@ -93,6 +93,9 @@ MARK_VISIBLEX (gcry_xrealloc)
 MARK_VISIBLEX (gcry_xstrdup)
 MARK_VISIBLEX (gcry_free)
 
+MARK_VISIBLEX (gcry_ct_memequal)
+MARK_VISIBLEX (gcry_ct_memequal_len)
+
 MARK_VISIBLEX (gcry_md_algo_info)
 MARK_VISIBLEX (gcry_md_algo_name)
 MARK_VISIBLEX (gcry_md_close)
@@ -344,6 +347,9 @@ MARK_VISIBLEX (_gcry_mpi_get_const)
 #define gcry_xstrdup                _gcry_USE_THE_UNDERSCORED_FUNCTION
 #define gcry_free                   _gcry_USE_THE_UNDERSCORED_FUNCTION
 #define gcry_is_secure              _gcry_USE_THE_UNDERSCORED_FUNCTION
+
+#define gcry_ct_memequal            _gcry_USE_THE_UNDERSCORED_FUNCTION
+#define gcry_ct_memequal_len        _gcry_USE_THE_UNDERSCORED_FUNCTION
 
 #define gcry_cipher_open            _gcry_USE_THE_UNDERSCORED_FUNCTION
 #define gcry_cipher_close           _gcry_USE_THE_UNDERSCORED_FUNCTION

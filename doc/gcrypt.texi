@@ -5947,6 +5947,7 @@ wrong.
 
 @menu
 * Memory allocation::   Functions related to memory allocation.
+* Constant-time comparison::  Comparison without timing side channels.
 * Context management::  Functions related to context management.
 * Buffer description::  A data type to describe buffers.
 * Config reporting::    How to check Libgcrypt's configuration.
@@ -5990,6 +5991,38 @@ whether the memory pointed to by @var{p} is secure memory or not,
 
 @deftypefun void gcry_free (void *@var{p})
 Release the memory area pointed to by @var{p}.
+@end deftypefun
+
+
+@node Constant-time comparison
+@section Constant-time comparison
+
+When comparing secret values, such as MACs or key material, a plain
+@code{memcmp} must not be used: it returns on the first differing
+byte and thus leaks information about the secret through the timing
+side channel.  Libgcrypt provides comparison functions whose
+execution time does not depend on the contents of the compared
+buffers.
+
+@deftypefun {unsigned int} gcry_ct_memequal (const void *@var{b1}, @
+            const void *@var{b2}, size_t @var{len})
+
+Compare @var{len} bytes at @var{b1} and @var{b2} in constant time and
+return 1 if they are equal, 0 otherwise.  The execution time depends
+only on @var{len}, never on the contents of the buffers.
+@end deftypefun
+
+@deftypefun {unsigned int} gcry_ct_memequal_len (const void *@var{b1}, @
+            size_t @var{len1}, const void *@var{b2}, size_t @var{len2})
+
+Compare @var{len1} bytes at @var{b1} with @var{len2} bytes at
+@var{b2} and return 1 if both the lengths and the contents are equal,
+0 otherwise.  Unlike a naive implementation, this function does not
+return early on a length mismatch; the length comparison is folded
+into the result with constant-time operations and the contents are
+always compared.  The execution time depends only on the (public)
+length values, never on the contents of the buffers or on whether the
+lengths match.
 @end deftypefun
 
 

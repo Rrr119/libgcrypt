@@ -1,0 +1,17 @@
+{
+  "root": "/home/dev/feedback/uid31127",
+  "B": "/home/dev/feedback/uid31127",
+  "sha": "42d7aac82d917f7279e7e89f039c05f6073a6928",
+  "wslDistro": "Ubuntu-26.04",
+  "source": {
+    "owner": "gpg",
+    "repo": "libgcrypt",
+    "sha": "42d7aac82d917f7279e7e89f039c05f6073a6928"
+  },
+  "fork": {
+    "owner": "Rrr119",
+    "repo": "libgcrypt",
+    "cloneUrl": "https://github.com/Rrr119/libgcrypt.git"
+  },
+  "at": "2026-11-20T23:55:20.657Z"
+}

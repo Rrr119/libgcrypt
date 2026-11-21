@@ -25,6 +25,7 @@
 
 #define ct_not_memequal _gcry_ct_not_memequal
 #define ct_memequal _gcry_ct_memequal
+#define ct_memequal_len _gcry_ct_memequal_len
 #define ct_memmov_cond _gcry_ct_memmov_cond
 
 
@@ -81,6 +82,13 @@ unsigned int _gcry_ct_not_memequal (const void *b1, const void *b2, size_t len);
    otherwise.  We use pointer of void *, so that it can be used with
    any structure.  */
 unsigned int _gcry_ct_memequal (const void *b1, const void *b2, size_t len);
+
+/* Compare byte-arrays B1 of length LEN1 and B2 of length LEN2,
+   return 1 if both the lengths and the contents are the same, 0
+   otherwise.  Does not leak the result of the length comparison
+   through the timing side channel.  */
+unsigned int _gcry_ct_memequal_len (const void *b1, size_t len1,
+				    const void *b2, size_t len2);
 
 /* Prevent compiler from assuming value of variable and from making
    non-constant time optimizations.  */
